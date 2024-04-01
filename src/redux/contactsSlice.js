@@ -17,11 +17,13 @@ const contactsSlice = createSlice({
                 state.isLoading = false;
                 state.items = action.payload;
             })
-            .addCase(fetchContacts.rejected, () => {}),
+            .addCase(fetchContacts.rejected, state => {
+                state.error = true;
+            }),
 });
 
 export const selectContacts = state => state.contacts.items;
-export const loading = state => state.contacts.isLoading;
+export const selectIsLoading = state => state.contacts.isLoading;
 
 export const contactsReducer = contactsSlice.reducer;
 

@@ -1,15 +1,17 @@
 // import ContactForm from './ContactForm/ContactForm';
 import SearchBox from './SearchBox/SearchBox';
 import ContactList from './ContactList/ContactList';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Title from './Title/Title';
 import s from './App.module.css';
 import { useEffect } from 'react';
 import { fetchContacts } from '../redux/contactsOps';
-import { loading } from '../redux/contactsSlice';
+import { selectIsLoading } from '../redux/contactsSlice';
 
 export default function App() {
     const dispatch = useDispatch();
+    const isLoading = useSelector(selectIsLoading);
+
     useEffect(() => {
         dispatch(fetchContacts);
     }, [dispatch]);
@@ -20,7 +22,7 @@ export default function App() {
             {/* <ContactForm /> */}
             <SearchBox />
             <ContactList />
-            {loading && <b>Request in progress...</b>}
+            {isLoading && <b>Request in progress...</b>}
         </div>
     );
 }
