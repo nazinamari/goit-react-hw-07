@@ -1,29 +1,26 @@
-// import { useState } from 'react';
-// import { useEffect } from 'react';
-import ContactForm from './ContactForm/ContactForm';
+// import ContactForm from './ContactForm/ContactForm';
 import SearchBox from './SearchBox/SearchBox';
 import ContactList from './ContactList/ContactList';
-import css from './App.module.css';
-import { useSelector } from 'react-redux';
-import { selectContacts } from '../redux/contactsSlice';
+import { useDispatch } from 'react-redux';
+import Title from './Title/Title';
+import s from './App.module.css';
+import { useEffect } from 'react';
+import { fetchContacts } from '../redux/contactsOps';
+import { loading } from '../redux/contactsSlice';
 
 export default function App() {
-    const contacts = useSelector(selectContacts);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(fetchContacts);
+    }, [dispatch]);
 
     return (
-        <div>
-            <div className={css.wrapPhoneBook}>
-                <h1>PhoneBook</h1>
-                <section className={css.section}>
-                    <ContactForm />
-                </section>
-                <section className={css.section}>
-                    <SearchBox />
-                </section>
-                <section className={css.section}>
-                    {contacts.length ? <ContactList /> : <p>No contacts yet</p>}
-                </section>
-            </div>
+        <div className={s.container}>
+            <Title />
+            {/* <ContactForm /> */}
+            <SearchBox />
+            <ContactList />
+            {loading && <b>Request in progress...</b>}
         </div>
     );
 }
