@@ -4,7 +4,7 @@ import css from './ContactList.module.css';
 import { selectContacts } from '../../redux/contactsSlice';
 // import { selectFilterName } from '../../redux/filtersSlice';
 
-export default function ContactList({ onDelete }) {
+export default function ContactList() {
     const contacts = useSelector(selectContacts);
     // const filterValue = useSelector(selectFilterName);
 
@@ -16,7 +16,7 @@ export default function ContactList({ onDelete }) {
         <ul className={css.list}>
             {contacts.map(item => (
                 <li key={item.id} className={css.item}>
-                    <Contact data={item} onDelete={onDelete} />
+                    <Contact data={item} />
                 </li>
             ))}
         </ul>
