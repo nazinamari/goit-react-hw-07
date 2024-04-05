@@ -1,11 +1,11 @@
 import { FaUser } from 'react-icons/fa';
 import { FaPhoneAlt } from 'react-icons/fa';
 import css from './Contact.module.css';
-// import { useDispatch } from 'react-redux';
-// import { deleteContact } from '../../redux/contactsSlice';
+import { useDispatch } from 'react-redux';
+import { deleteContact } from '../../redux/contactsOps';
 
-export default function Contact({ data: { name, number } }) {
-    // const dispatch = useDispatch();
+export default function Contact({ data: { id, name, number } }) {
+    const dispatch = useDispatch();
 
     return (
         <div className={css.wrap}>
@@ -19,7 +19,7 @@ export default function Contact({ data: { name, number } }) {
                     <p>{number}</p>
                 </div>
             </div>
-            {/* <button onClick={() => dispatch(deleteContact(id))}>Delete</button> */}
+            <button onClick={() => dispatch(deleteContact(id))}>Delete</button>
         </div>
     );
 }
